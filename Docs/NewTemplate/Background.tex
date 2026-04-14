@@ -1,0 +1,43 @@
+\section{Study Area and Data}\label{sec:data}
+
+The empirical setting consists of three Madrid districts with distinct urban profiles and mobility patterns: Salamanca, Tetuan, and Villa de Vallecas. The analysis uses hourly records from 2021--2023, with 2021 treated as the pre-policy period and 2022--2023 treated as post-policy observations after the first circulation restrictions considered here came into force on 1 January 2022 under the 2021 amendment to Madrid's Sustainable Mobility Ordinance \cite{OrdenanzaMovilidadMadrid2021}. This district-level design keeps the policy question local, which is appropriate because both traffic intensity and pollutant behavior can vary sharply across urban environments.
+
+The data architecture combines official datasets from the Madrid Open Data Portal \cite{MadridOpenDataPortal}: hourly air-quality records, hourly meteorological records, historical traffic measurements, and traffic-point location files. Air-quality series provide the target pollutants. Meteorological covariates account for atmospheric conditions that can alter pollutant concentration independently of policy changes. Traffic measurements and district-level traffic intensity act as proxies for local mobility conditions that may covary with post-policy deviations, without by themselves identifying a mobility mechanism. In the final panel, one air-quality station is retained per district, district traffic is taken from the hourly aggregation produced by the project notebooks, and meteorological variables are rebuilt as hourly city-wide averages to avoid the sparsity left by the initial merge.
+
+The purpose of this section is to define what enters the model and why, rather than to reproduce a long narrative about district demographics. Table~\ref{tab:variables} summarizes the variables and their role in the forecasting design. One practical limitation should be made explicit: PM$_{2.5}$ is unavailable for the retained Villa de Vallecas station in the final panel, so that pollutant is not reported for that district in the result tables.
+
+\begin{table}[htbp]
+\centering
+\caption{Variables used in the counterfactual forecasting design}
+\label{tab:variables}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\multicolumn{2}{@{}l}{\textbf{Input features}} \\
+\cmidrule(r){1-2}
+Variable & Description \\
+\midrule
+Calendar encoding & Cyclic hour, weekday, month, and day-of-year features \\
+Historical pollutant values & Autoregressive lags used by Ridge and LightGBM \\
+Wind speed & Wind intensity \\
+Wind direction & Prevailing wind direction \\
+Temperature & Ambient temperature \\
+Relative humidity & Humidity level \\
+Barometric pressure & Atmospheric pressure \\
+Solar radiation & Solar-radiation intensity \\
+Precipitation & Rainfall indicator or amount \\
+District traffic intensity & District-level traffic aggregation \\
+\midrule
+\multicolumn{2}{@{}l}{\textbf{Target pollutants}} \\
+\cmidrule(r){1-2}
+Variable & Description \\
+\midrule
+NO & Nitric oxide concentration \\
+NO$_2$ & Nitrogen dioxide concentration \\
+NO$_x$ & Nitrogen oxides concentration \\
+PM$_{10}$ & Particulate matter below 10\textmu m \\
+PM$_{2.5}$ & Particulate matter below 2.5\textmu m \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The exact feature bundle varies slightly by model family. Ridge and LightGBM use pollutant-specific historical lags together with district traffic, meteorology, and cyclic calendar features, whereas the stacked multivariate LSTM uses windows of exogenous and calendar information and predicts the pollutant vector jointly. The substantive question is not whether these data can support a single apparently strong forecast, but whether the sign and magnitude of the post-policy gaps remain stable when model family, temporal context, and feature availability are deliberately perturbed.

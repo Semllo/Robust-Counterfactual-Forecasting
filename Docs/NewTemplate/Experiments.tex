@@ -1,0 +1,24 @@
+\section{Experimental Design}\label{sec:design}
+
+The empirical protocol begins by defining 1 January 2022 as the main policy boundary. This leaves the full year 2021 for model estimation and the years 2022--2023 for post-policy evaluation. Models are fitted only on pre-policy data. Within that period, the first 70\% of 2021 is used for training and the last 30\% for validation.
+
+Model selection is performed in the pre-policy regime. The primary metric for selecting the best specification is mean absolute error (MAE), reported by pollutant and then summarized compactly across pollutants and districts. The main text focuses on MAE and treats post-policy metrics separately. The principal specification is chosen exclusively on this pre-declared main split. The rolling-origin exercise is a robustness check for family-level stability and short-window stability, not a second model-selection stage. For Ridge and LightGBM, validation and post-policy prediction are recursive because the estimand is a no-change continuation of the pre-policy autoregressive path. The multivariate LSTM is evaluated over observed exogenous windows because it predicts the pollutants jointly in a direct fashion. A separate direct-evaluation sensitivity is reported later to compare model families under a more homogeneous one-step setup, but it is not used as the main counterfactual because it conditions on observed post-policy pollutant lags.
+
+The study evaluates the following model-and-data configurations:
+\begin{itemize}
+\item full feature set with Ridge, LightGBM, and LSTM;
+\item two naive benchmarks: one-hour persistence and same-hour previous-day seasonal naive forecasting;
+\item temporal windows of 6 and 24 steps;
+\item a supplementary rolling-origin sensitivity with windows of 6, 12, and 24 steps for the preferred model family;
+\item an ablation without traffic variables;
+\item an ablation without meteorological variables;
+\item a sensitivity run without IQR-based outlier removal;
+\item a fixed-horizon placebo comparison using late-2021 boundaries;
+\item a direct one-step evaluation sensitivity for comparing model families under a more homogeneous prediction scheme.
+\end{itemize}
+
+This is intentionally a minimal robustness design. It is broad enough to test whether the post-policy conclusion depends on one particular source of information or one specific preprocessing choice, but narrow enough to keep the interpretation readable. More aggressive ablation grids would increase the number of tables and the discussion burden without proportionate gain.
+
+Once the best pre-policy specification is identified, post-policy forecasts are generated for each pollutant and district. The evaluation then aggregates the realized post-policy gaps using PIP, mean residual, and median residual. Uncertainty for those aggregate summaries is approximated with a 500-repetition block bootstrap that resamples whole days, which preserves short-range autocorrelation better than pointwise resampling. Temporal specificity is checked with 60-day placebos at 1 October 2021 and 1 November 2021, compared with the first 60 days after 1 January 2022 under the same preferred model. District-level reporting is essential because the substantive claim is local rather than city-wide, and heterogeneous responses across Salamanca, Tetuan, and Villa de Vallecas are plausible on substantive grounds.
+
+More extensive resampling or hyperparameter exploration is left for future work. The present design prioritizes a compact comparison and a small set of robustness checks that can be defended within a short article. Even after the added placebos and rolling-origin checks, the contribution remains a local predictive assessment rather than a city-wide or strongly causal estimate.

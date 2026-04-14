@@ -1,0 +1,51 @@
+# Large raw and derived data
+Code/Datos/datos/
+Code/Datos.zip
+tmp_samples/
+
+# Experiment outputs and diagnostics
+Code/experiment_outputs_smoke/
+Code/experiment_outputs_full/
+Code/experiment_outputs_lstm_origlike_smoke/
+Code/experiment_outputs_full_origlike_lstm/
+Code/legacy_protocol_diagnostics_smoke/
+Code/legacy_protocol_diagnostics_smoke2/
+Code/legacy_protocol_diagnostics_full/
+Code/robustness_extensions/
+Code/manuscript_diagnostics/*.csv
+Code/manuscript_diagnostics/*.json
+Code/manuscript_diagnostics/*.txt
+Code/manuscript_diagnostics/*.png
+
+# Python cache
+__pycache__/
+Code/__pycache__/
+*.pyc
+
+# LaTeX build artifacts
+Docs/NewTemplate/build/
+Docs/NewTemplate/*.aux
+Docs/NewTemplate/*.bbl
+Docs/NewTemplate/*.blg
+Docs/NewTemplate/*.log
+Docs/NewTemplate/*.out
+
+# Bundled template docs and internal notes
+Docs/NewTemplate/llncsdoc.pdf
+Docs/NewTemplate/readme.txt
+Docs/NewTemplate/editor_email_draft.txt
+Docs/NewTemplate/empirical_status.txt
+Docs/NewTemplate/history.txt
+Docs/NewTemplate/legacy_protocol_findings.txt
+Docs/NewTemplate/fig1.eps
+
+# Local reference material not meant for the public repo
+684482_1_En_8_Chapter_Author.pdf
+chapter_extracted.txt
+current_paper_extracted.txt
+READ_ME.txt
+Code/Datos/memoria.pdf
+Code/Datos/memoria_extracted.txt
+Code/Datos/TFM - Pres.pdf
+Docs/Extended_version_Soco25.zip
+Code/__MACOSX/
