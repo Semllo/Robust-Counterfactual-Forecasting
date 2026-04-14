@@ -5,7 +5,6 @@ Code and manuscript sources for the paper on robust counterfactual forecasting o
 ## Repository contents
 
 - `Code/`: data-preparation notebooks, download helper, experiment runners, and manuscript diagnostics.
-- `Docs/NewTemplate/`: LaTeX source of the manuscript and the compiled PDF.
 
 ## Reproducibility
 
@@ -25,7 +24,3 @@ Main execution entry points:
 - `Code/run_counterfactual_experiments.py`
 - `Code/run_robustness_extensions.py`
 - `Code/run_manuscript_diagnostics.py`
-
-## Manuscript
-
-The current paper source is under `Docs/NewTemplate/`, and the latest compiled PDF is `Docs/NewTemplate/samplepaper.pdf`.

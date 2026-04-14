@@ -23,6 +23,7 @@ Code/__pycache__/
 *.pyc
 
 # LaTeX build artifacts
+Docs/NewTemplate/
 Docs/NewTemplate/build/
 Docs/NewTemplate/*.aux
 Docs/NewTemplate/*.bbl
